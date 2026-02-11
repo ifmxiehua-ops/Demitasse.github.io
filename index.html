@@ -152,7 +152,6 @@
                     </div>
                 </div>
 
-                <!-- 修复画框内偏移的问题 -->
                 <div id="echarts-map" class="flex-grow w-full relative z-10 overflow-hidden" style="min-height: 450px;"></div>
                 
                 <div class="relative z-10 text-right text-slate-500 text-xs mt-4">
@@ -187,6 +186,32 @@
         <div class="max-w-7xl mx-auto px-4">
             <h2 class="text-4xl font-bold text-center mb-16">个人项目经历</h2>
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- 新增项目: 2026美赛C题 - 与星共舞 -->
+                <div class="bg-white dark:bg-slate-800 rounded-3xl overflow-hidden shadow-xl hover:-translate-y-2 transition-all">
+                    <div class="h-48 bg-gradient-to-br from-indigo-600 via-blue-700 to-slate-900 flex items-center justify-center text-white text-5xl">
+                        <i class="fas fa-satellite"></i>
+                    </div>
+                    <div class="p-8">
+                        <div class="flex justify-between items-start mb-3">
+                            <h3 class="text-xl font-bold">2026 MCM C：与星共舞</h3>
+                            <span class="px-2 py-1 bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 text-[10px] font-bold rounded uppercase">New</span>
+                        </div>
+                        <p class="text-slate-500 dark:text-slate-400 text-sm mb-6 leading-relaxed">
+                            针对低轨卫星星座的编队飞行与调度优化问题，建立了基于轨道摄动理论的动力学模型，利用改进的启发式算法实现了数千颗卫星的避障与协同覆盖方案。
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="px-3 py-1 bg-slate-100 dark:bg-slate-700 rounded-full text-xs font-bold">最佳策略寻求</span>
+                            <span class="px-3 py-1 bg-slate-100 dark:bg-slate-700 rounded-full text-xs font-bold">多目标优化</span>
+                            <span class="px-3 py-1 bg-slate-100 dark:bg-slate-700 rounded-full text-xs font-bold">Python</span>
+                        </div>
+                        <a href="#" class="text-indigo-500 font-bold inline-flex items-center hover:gap-2 transition-all">
+                            查看建模思路 <i class="fas fa-arrow-right ml-2 text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 既有项目 1 -->
                 <div class="bg-white dark:bg-slate-800 rounded-3xl overflow-hidden shadow-xl hover:-translate-y-2 transition-all">
                     <div class="h-48 bg-gradient-to-br from-purple-500 to-blue-600 flex items-center justify-center text-white text-5xl">
                         <i class="fas fa-layer-group"></i>
@@ -205,6 +230,7 @@
                         </a>
                     </div>
                 </div>
+
             </div>
         </div>
     </section>
@@ -212,13 +238,13 @@
     <!-- 页脚 -->
     <footer class="py-12 border-t dark:border-slate-800">
         <div class="max-w-7xl mx-auto px-4 text-center">
-            <p class="text-slate-500 text-sm">&copy; 2024 Wang Haoyu. 构建于同济大学.</p>
+            <p class="text-slate-500 text-sm">&copy; 2026 Demitasse. 构建于同济大学.</p>
         </div>
     </footer>
 
     <script>
         // 1. 打字机
-        const texts = ["05在读大学生", "同济海洋人"];
+        const texts = ["05在读大学生", "同济海洋人", "数学建模爱好者"];
         let count = 0, index = 0;
         function type() {
             if (count === texts.length) count = 0;
@@ -289,17 +315,11 @@
                     series: [{
                         type: 'map',
                         map: type,
-                        roam: true, // 允许缩放和拖拽
-                        
-                        // --- 修复偏离画框的关键配置 ---
-                        // layoutCenter 和 layoutSize 联合使用可以将地图固定在容器中心
+                        roam: true,
                         layoutCenter: ['50%', '50%'], 
                         layoutSize: type === 'china' ? '105%' : '100%', 
-                        
-                        // 针对中国地图，可能需要稍微调整中心点（因为南海诸岛的存在，重心会偏下）
                         center: type === 'china' ? [104.1954, 35.8617] : null,
-                        zoom: type === 'china' ? 1.2 : 1, // 中国地图初始稍微放大一点
-
+                        zoom: type === 'china' ? 1.2 : 1, 
                         emphasis: {
                             label: { show: false },
                             itemStyle: { areaColor: '#c084fc' }
