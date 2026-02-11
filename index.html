@@ -8,6 +8,10 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- 引入 Font Awesome (图标库) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- 引入 Leaflet 地图 CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+
     <!-- 配置 Tailwind 主题 -->
     <script>
         tailwind.config = {
@@ -53,6 +57,11 @@
         @keyframes blink {
             50% { opacity: 0; }
         }
+
+        /* 地图暗黑模式适配：反转颜色以适应深色主题 */
+        .dark #map {
+            filter: invert(100%) hue-rotate(180deg) brightness(95%) contrast(90%);
+        }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800 dark:bg-gray-900 dark:text-gray-100 transition-colors duration-300">
@@ -68,7 +77,8 @@
                 <div class="hidden md:flex space-x-8 items-center">
                     <a href="#home" class="hover:text-primary transition-colors">首页</a>
                     <a href="#about" class="hover:text-primary transition-colors">关于我</a>
-                    <a href="#skills" class="hover:text-primary transition-colors">技能</a>
+                    <!-- 修改：将技能改为足迹 -->
+                    <a href="#travel" class="hover:text-primary transition-colors">足迹</a>
                     <a href="#projects" class="hover:text-primary transition-colors">项目</a>
                     <button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
                         <i class="fas fa-moon dark:hidden"></i>
@@ -88,6 +98,7 @@
             <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 text-center">
                 <a href="#home" class="block px-3 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800">首页</a>
                 <a href="#about" class="block px-3 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800">关于我</a>
+                <a href="#travel" class="block px-3 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800">足迹</a>
                 <a href="#projects" class="block px-3 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800">项目</a>
             </div>
         </div>
@@ -99,20 +110,20 @@
             <div class="md:w-1/2 text-center md:text-left mt-8 md:mt-0">
                 <p class="text-primary font-semibold mb-2 fade-in-up">你好，我是</p>
                 <h1 class="text-4xl md:text-6xl font-bold mb-4 fade-in-up delay-100">
-                    Demitasse <span class="text-gray-400 text-2xl">(Alex)</span>
+                    张三 <span class="text-gray-400 text-2xl">(Alex)</span>
                 </h1>
                 <h2 class="text-2xl md:text-3xl text-gray-500 dark:text-gray-400 mb-6 fade-in-up delay-200">
                     <span id="typing-text" class="typing-cursor"></span>
                 </h2>
                 <p class="text-gray-600 dark:text-gray-300 mb-8 max-w-lg mx-auto md:mx-0 fade-in-up delay-300">
-                    热爱编程，专注于创造用户体验优秀、代码简洁高效的 Web 应用程序。喜欢探索新技术，致力于解决实际问题。
+                    热爱编程，也热爱探索世界。在代码的逻辑与世界的广阔之间寻找平衡。
                 </p>
                 <div class="flex justify-center md:justify-start space-x-4 fade-in-up delay-300">
                     <a href="#projects" class="bg-primary hover:bg-blue-600 text-white px-6 py-3 rounded-lg shadow-lg transition-transform transform hover:-translate-y-1">
                         查看作品
                     </a>
-                    <a href="#contact" class="border border-gray-300 dark:border-gray-600 hover:border-primary hover:text-primary px-6 py-3 rounded-lg transition-colors">
-                        联系我
+                    <a href="#travel" class="border border-gray-300 dark:border-gray-600 hover:border-primary hover:text-primary px-6 py-3 rounded-lg transition-colors">
+                        查看足迹
                     </a>
                 </div>
             </div>
@@ -121,7 +132,6 @@
                 <div class="relative w-64 h-64 md:w-80 md:h-80">
                     <div class="absolute inset-0 bg-blue-200 dark:bg-blue-900 rounded-full blur-3xl opacity-30 animate-pulse"></div>
                     <div class="relative w-full h-full bg-gradient-to-tr from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white text-6xl shadow-2xl overflow-hidden border-4 border-white dark:border-gray-800">
-                         <!-- 这里可以使用 img 标签替换为你的真实照片 -->
                          <i class="fas fa-user-astronaut"></i>
                     </div>
                 </div>
@@ -142,63 +152,68 @@
                         <i class="fas fa-graduation-cap"></i>
                     </div>
                     <h3 class="text-xl font-semibold mb-2">教育背景</h3>
-                    <p class="text-gray-600 dark:text-gray-300">同济大学<br>海洋与地球科学学院</p>
+                    <p class="text-gray-600 dark:text-gray-300">计算机科学与技术<br>本科学位</p>
                 </div>
                 <div class="p-6 bg-gray-50 dark:bg-gray-700 rounded-xl hover:shadow-xl transition-shadow">
                     <div class="w-12 h-12 mx-auto bg-green-100 text-green-600 rounded-lg flex items-center justify-center text-xl mb-4">
                         <i class="fas fa-briefcase"></i>
                     </div>
-                    <h3 class="text-xl font-semibold mb-2">个人经历</h3>
-                    <p class="text-gray-600 dark:text-gray-300">中国大学生数学竞赛<br>美国大学生数学建模竞赛</p>
+                    <h3 class="text-xl font-semibold mb-2">工作经验</h3>
+                    <p class="text-gray-600 dark:text-gray-300">2年 前端开发经验<br>参与过多个大型项目</p>
                 </div>
                 <div class="p-6 bg-gray-50 dark:bg-gray-700 rounded-xl hover:shadow-xl transition-shadow">
                     <div class="w-12 h-12 mx-auto bg-purple-100 text-purple-600 rounded-lg flex items-center justify-center text-xl mb-4">
-                        <i class="fas fa-heart"></i>
+                        <i class="fas fa-plane"></i>
                     </div>
-                    <h3 class="text-xl font-semibold mb-2">兴趣爱好</h3>
-                    <p class="text-gray-600 dark:text-gray-300"vibe-coding<br>健身、足球</p>
+                    <h3 class="text-xl font-semibold mb-2">旅行达人</h3>
+                    <p class="text-gray-600 dark:text-gray-300">打卡10+国家<br>探索过30+城市</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 技能栈 -->
-    <section id="skills" class="py-20">
+    <!-- NEW: 旅行足迹 (替换了原有的技能栈) -->
+    <section id="travel" class="py-20">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-3xl font-bold text-center mb-12">技术栈</h2>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-                <!-- 技能项 -->
-                <div class="flex flex-col items-center p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm hover:shadow-md transition-all">
-                    <i class="fab fa-html5 text-4xl text-orange-500 mb-2"></i>
-                    <span class="font-medium">HTML5</span>
+            <h2 class="text-3xl font-bold text-center mb-6">我的旅行足迹</h2>
+            <p class="text-center text-gray-500 mb-12 max-w-2xl mx-auto">
+                读万卷书，行万里路。中国部分记录了我走过的城市，世界部分记录了我探索过的国家。
+            </p>
+            
+            <!-- 地图容器 -->
+            <div class="relative w-full h-[500px] rounded-xl overflow-hidden shadow-2xl border border-gray-200 dark:border-gray-700 z-0">
+                <div id="map" class="w-full h-full z-0"></div>
+                
+                <!-- 图例悬浮窗 -->
+                <div class="absolute bottom-6 right-6 bg-white/90 dark:bg-gray-800/90 backdrop-blur p-4 rounded-lg shadow-lg z-[1000] text-sm">
+                    <div class="flex items-center mb-2">
+                        <span class="w-3 h-3 rounded-full bg-blue-500 mr-2"></span>
+                        <span class="text-gray-700 dark:text-gray-300">国内城市</span>
+                    </div>
+                    <div class="flex items-center">
+                        <span class="w-3 h-3 rounded-full bg-red-500 mr-2"></span>
+                        <span class="text-gray-700 dark:text-gray-300">国外国家</span>
+                    </div>
                 </div>
-                <div class="flex flex-col items-center p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm hover:shadow-md transition-all">
-                    <i class="fab fa-css3-alt text-4xl text-blue-500 mb-2"></i>
-                    <span class="font-medium">CSS3</span>
+            </div>
+
+            <!-- 旅行统计 -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-8">
+                <div class="text-center p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm">
+                    <div class="text-3xl font-bold text-blue-600 mb-1">12</div>
+                    <div class="text-xs text-gray-500 uppercase tracking-wide">国内城市</div>
                 </div>
-                <div class="flex flex-col items-center p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm hover:shadow-md transition-all">
-                    <i class="fab fa-js text-4xl text-yellow-400 mb-2"></i>
-                    <span class="font-medium">JavaScript</span>
+                <div class="text-center p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm">
+                    <div class="text-3xl font-bold text-red-500 mb-1">5</div>
+                    <div class="text-xs text-gray-500 uppercase tracking-wide">国外国家</div>
                 </div>
-                <div class="flex flex-col items-center p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm hover:shadow-md transition-all">
-                    <i class="fab fa-react text-4xl text-cyan-400 mb-2"></i>
-                    <span class="font-medium">React</span>
+                <div class="text-center p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm">
+                    <div class="text-3xl font-bold text-purple-500 mb-1">15k+</div>
+                    <div class="text-xs text-gray-500 uppercase tracking-wide">旅行里程</div>
                 </div>
-                <div class="flex flex-col items-center p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm hover:shadow-md transition-all">
-                    <i class="fab fa-python text-4xl text-blue-400 mb-2"></i>
-                    <span class="font-medium">Python</span>
-                </div>
-                <div class="flex flex-col items-center p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm hover:shadow-md transition-all">
-                    <i class="fab fa-git-alt text-4xl text-red-500 mb-2"></i>
-                    <span class="font-medium">Git</span>
-                </div>
-                <div class="flex flex-col items-center p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm hover:shadow-md transition-all">
-                    <i class="fas fa-database text-4xl text-green-500 mb-2"></i>
-                    <span class="font-medium">SQL</span>
-                </div>
-                <div class="flex flex-col items-center p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm hover:shadow-md transition-all">
-                    <i class="fab fa-figma text-4xl text-pink-500 mb-2"></i>
-                    <span class="font-medium">Figma</span>
+                <div class="text-center p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm">
+                    <div class="text-3xl font-bold text-yellow-500 mb-1">∞</div>
+                    <div class="text-xs text-gray-500 uppercase tracking-wide">下一站期待</div>
                 </div>
             </div>
         </div>
@@ -213,7 +228,6 @@
                 <!-- 项目卡片 1 -->
                 <div class="bg-white dark:bg-gray-900 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 group">
                     <div class="h-48 bg-gray-300 dark:bg-gray-700 relative overflow-hidden">
-                        <!-- 这里的 div 模拟项目截图 -->
                         <div class="absolute inset-0 flex items-center justify-center text-gray-500 dark:text-gray-400 bg-gray-200 dark:bg-gray-800 group-hover:scale-105 transition-transform duration-500">
                            <i class="fas fa-shopping-cart text-5xl"></i>
                         </div>
@@ -311,10 +325,13 @@
         </div>
     </footer>
 
+    <!-- 引入 Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
     <!-- JavaScript 交互逻辑 -->
     <script>
         // 1. 打字机效果逻辑
-        const texts = ["05在读大学生"];
+        const texts = ["前端开发者", "UI 设计师", "旅行爱好者"];
         let count = 0;
         let index = 0;
         let currentText = "";
@@ -373,9 +390,80 @@
                 mobileMenu.classList.add('hidden');
             });
         });
+
+        // ==========================================
+        // 4. 地图初始化 (Leaflet)
+        // ==========================================
+        
+        // 确保 DOM 加载完成后初始化地图
+        document.addEventListener('DOMContentLoaded', function() {
+            // 初始化地图，设置中心点为中国，缩放级别为 3
+            // 注意：'map' 是地图容器的 id
+            var map = L.map('map', {
+                scrollWheelZoom: false // 禁用鼠标滚轮缩放，防止页面滚动冲突
+            }).setView([35.8617, 104.1954], 3);
+
+            // 加载地图图层 (CartoDB Positron 风格，简洁且免费)
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+                subdomains: 'abcd',
+                maxZoom: 19
+            }).addTo(map);
+
+            // --- 自定义图标定义 ---
+            // 蓝色图标（用于国内城市）
+            var blueIcon = new L.Icon({
+                iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png',
+                shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+                iconSize: [25, 41],
+                iconAnchor: [12, 41],
+                popupAnchor: [1, -34],
+                shadowSize: [41, 41]
+            });
+
+            // 红色图标（用于国外国家）
+            var redIcon = new L.Icon({
+                iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+                shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+                iconSize: [25, 41],
+                iconAnchor: [12, 41],
+                popupAnchor: [1, -34],
+                shadowSize: [41, 41]
+            });
+
+            // --- 数据点添加 ---
+
+            // 1. 国内城市 (使用蓝色图标)
+            var chinaCities = [
+                { name: "北京", lat: 39.9042, lng: 116.4074, desc: "故宫、长城，历史的厚重。" },
+                { name: "上海", lat: 31.2304, lng: 121.4737, desc: "外滩夜景，现代都市。" },
+                { name: "成都", lat: 30.5728, lng: 104.0668, desc: "火锅与大熊猫。" },
+                { name: "西安", lat: 34.3416, lng: 108.9398, desc: "兵马俑，古都风韵。" },
+                { name: "深圳", lat: 22.5431, lng: 114.0579, desc: "科技之都，创新活力。" },
+                { name: "广州", lat: 23.1291, lng: 113.2644, desc: "美食之都，岭南文化。" }
+            ];
+
+            chinaCities.forEach(function(city) {
+                L.marker([city.lat, city.lng], {icon: blueIcon})
+                 .addTo(map)
+                 .bindPopup("<b>" + city.name + "</b><br>" + city.desc);
+            });
+
+            // 2. 国外国家 (使用红色图标)
+            var foreignCountries = [
+                { name: "日本", lat: 36.2048, lng: 138.2529, desc: "京都寺庙，北海道雪景。" },
+                { name: "泰国", lat: 15.8700, lng: 100.9925, desc: "曼谷街头，普吉岛海滩。" },
+                { name: "法国", lat: 46.2276, lng: 2.2137, desc: "巴黎铁塔，普罗旺斯薰衣草。" },
+                { name: "美国", lat: 37.0902, lng: -95.7129, desc: "纽约时代广场，加州阳光。" },
+                { name: "英国", lat: 55.3781, lng: -3.4360, desc: "伦敦眼，苏格兰高地。" }
+            ];
+
+            foreignCountries.forEach(function(country) {
+                L.marker([country.lat, country.lng], {icon: redIcon})
+                 .addTo(map)
+                 .bindPopup("<b>" + country.name + "</b><br>" + country.desc);
+            });
+        });
     </script>
 </body>
-
 </html>
-
-
