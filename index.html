@@ -15,7 +15,7 @@
             theme: {
                 extend: {
                     colors: {
-                        primary: '#a855f7', // 更加接近图片的紫色
+                        primary: '#a855f7', 
                         dark: '#0f172a',
                     }
                 }
@@ -39,13 +39,12 @@
         }
         @keyframes blink { 50% { opacity: 0; } }
 
-        /* 地图容器背景：匹配图片中的深色渐变 */
         .map-container-bg {
             background: radial-gradient(circle at 20% 30%, #1e293b 0%, #0f172a 100%);
             position: relative;
             overflow: hidden;
         }
-        /* 模拟图片中的光晕装饰 */
+        
         .glow-effect {
             position: absolute;
             width: 300px;
@@ -70,7 +69,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
                 <div class="flex-shrink-0 flex items-center">
-                    <span class="font-bold text-xl text-primary"><i class="fas fa-terminal mr-2"></i>Haoyu.Dev</span>
+                    <span class="font-bold text-xl text-primary"><i class="fas fa-terminal mr-2"></i>Demitasse.Dev</span>
                 </div>
                 <div class="hidden md:flex space-x-8 items-center">
                     <a href="#home" class="hover:text-primary transition-colors">首页</a>
@@ -116,7 +115,7 @@
                 <div class="relative group">
                     <div class="absolute -inset-1 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
                     <div class="relative w-64 h-64 md:w-80 md:h-80 bg-slate-200 dark:bg-slate-800 rounded-full flex items-center justify-center text-7xl border-4 border-white dark:border-slate-900 shadow-2xl">
-                         <i class="fas fa-user-astronomer text-primary"></i>
+                         <i class="fas fa-user-astronaut text-primary"></i>
                     </div>
                 </div>
             </div>
@@ -131,7 +130,6 @@
                     <h2 class="text-4xl font-bold mb-4">探索足迹</h2>
                     <div class="w-16 h-1 bg-primary rounded"></div>
                 </div>
-                <!-- 视图切换按钮 -->
                 <div class="flex bg-slate-100 dark:bg-slate-900 p-1 rounded-xl border dark:border-slate-800">
                     <button id="btn-world" class="map-toggle-btn active px-6 py-2 rounded-lg text-sm font-bold transition-all">
                         <i class="fas fa-globe-asia mr-2"></i>全球
@@ -144,22 +142,19 @@
 
             <!-- 地图主体 -->
             <div class="map-container-bg rounded-3xl p-4 md:p-8 shadow-2xl min-h-[500px] md:min-h-[650px] flex flex-col">
-                <!-- 光晕装饰 -->
                 <div class="glow-effect top-0 left-0"></div>
                 <div class="glow-effect bottom-0 right-0" style="background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, rgba(59, 130, 246, 0) 70%);"></div>
                 
-                <!-- 统计头部 -->
                 <div class="relative z-10 flex items-center justify-center mb-4 space-x-6">
                     <div id="map-title" class="text-white text-xl font-bold flex items-center">
                         <i class="fas fa-globe mr-3 text-blue-400"></i> 
-                        <span>全球 · 6个国家</span>
+                        <span>全球 · 2个国家</span>
                     </div>
                 </div>
 
-                <!-- ECharts 容器 -->
-                <div id="echarts-map" class="flex-grow w-full relative z-10" style="min-height: 450px;"></div>
+                <!-- 修复画框内偏移的问题 -->
+                <div id="echarts-map" class="flex-grow w-full relative z-10 overflow-hidden" style="min-height: 450px;"></div>
                 
-                <!-- 地图底部截止日期 -->
                 <div class="relative z-10 text-right text-slate-500 text-xs mt-4">
                     截止至 2026年2月11日
                 </div>
@@ -168,12 +163,12 @@
             <!-- 数据卡片 -->
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
                 <div class="p-6 bg-slate-50 dark:bg-slate-900 rounded-2xl border dark:border-slate-800 text-center">
-                    <div class="text-3xl font-black text-primary mb-1">6</div>
+                    <div class="text-3xl font-black text-primary mb-1">2</div>
                     <div class="text-xs uppercase tracking-widest text-slate-500 font-bold">已访国家</div>
                 </div>
                 <div class="p-6 bg-slate-50 dark:bg-slate-900 rounded-2xl border dark:border-slate-800 text-center">
-                    <div class="text-3xl font-black text-blue-500 mb-1">28</div>
-                    <div class="text-xs uppercase tracking-widest text-slate-500 font-bold">国内城市</div>
+                    <div class="text-3xl font-black text-blue-500 mb-1">14</div>
+                    <div class="text-xs uppercase tracking-widest text-slate-500 font-bold">国内省份</div>
                 </div>
                 <div class="p-6 bg-slate-50 dark:bg-slate-900 rounded-2xl border dark:border-slate-800 text-center">
                     <div class="text-3xl font-black text-emerald-500 mb-1">100%</div>
@@ -187,7 +182,7 @@
         </div>
     </section>
 
-    <!-- 项目 Section (保持原样但微调样式) -->
+    <!-- 项目 Section -->
     <section id="projects" class="py-24 bg-slate-50 dark:bg-slate-900">
         <div class="max-w-7xl mx-auto px-4">
             <h2 class="text-4xl font-bold text-center mb-16">个人项目经历</h2>
@@ -245,27 +240,22 @@
             document.documentElement.classList.toggle('dark');
         });
 
-        // ===================================================
-        // 3. ECharts 地图逻辑 (核心修改)
-        // ===================================================
+        // 3. ECharts 地图逻辑
         const chart = echarts.init(document.getElementById('echarts-map'));
         
-        // 数据定义
         const visitedCountries = [
             {name: 'China', value: 1},
-            {name: 'United States', value: 1},
-            {name: 'Japan', value: 1},
-            {name: 'France', value: 1},
-            {name: 'United Kingdom', value: 1},
-            {name: 'Thailand', value: 1}
+            {name: 'Japan', value: 1}
         ];
 
-        // 模拟图片5.jpg中的国内省份着色数据
         const visitedProvinces = [
-            {name: '北京', value: 1}, {name: '上海', value: 1}, {name: '广东', value: 1},
-            {name: '四川', value: 1}, {name: '陕西', value: 1}, {name: '黑龙江', value: 1},
-            {name: '内蒙古', value: 1}, {name: '浙江', value: 1}, {name: '江苏', value: 1},
-            {name: '福建', value: 1}, {name: '湖北', value: 1}, {name: '云南', value: 1}
+            {name: '内蒙古', value: 1}, {name: '黑龙江', value: 1}, 
+            {name: '北京', value: 1}, {name: '上海', value: 1}, 
+            {name: '浙江', value: 1}, {name: '江苏', value: 1}, 
+            {name: '香港', value: 1}, {name: '广东', value: 1}, 
+            {name: '重庆', value: 1}, {name: '四川', value: 1}, 
+            {name: '湖南', value: 1}, {name: '湖北', value: 1}, 
+            {name: '河南', value: 1}, {name: '山西', value: 1}
         ];
 
         async function initMap(type) {
@@ -293,30 +283,35 @@
                         min: 0,
                         max: 1,
                         inRange: {
-                            color: ['#ffffff', '#a855f7'] // 未访白色，已访紫色
+                            color: ['#ffffff', '#a855f7'] 
                         }
                     },
                     series: [{
                         type: 'map',
                         map: type,
-                        roam: true,
+                        roam: true, // 允许缩放和拖拽
+                        
+                        // --- 修复偏离画框的关键配置 ---
+                        // layoutCenter 和 layoutSize 联合使用可以将地图固定在容器中心
+                        layoutCenter: ['50%', '50%'], 
+                        layoutSize: type === 'china' ? '105%' : '100%', 
+                        
+                        // 针对中国地图，可能需要稍微调整中心点（因为南海诸岛的存在，重心会偏下）
+                        center: type === 'china' ? [104.1954, 35.8617] : null,
+                        zoom: type === 'china' ? 1.2 : 1, // 中国地图初始稍微放大一点
+
                         emphasis: {
                             label: { show: false },
                             itemStyle: { areaColor: '#c084fc' }
                         },
                         itemStyle: {
-                            borderColor: '#e2e8f0', // 省份边界线颜色
+                            borderColor: '#cbd5e1', 
                             borderWidth: 0.5,
                             areaColor: '#ffffff'
                         },
                         data: type === 'world' ? visitedCountries : visitedProvinces
                     }]
                 };
-
-                // 针对图片风格的视觉微调
-                if (type === 'world') {
-                    // 修正世界地图名称映射（视GeoJSON版本而定，有时需要手动对齐）
-                }
 
                 chart.hideLoading();
                 chart.setOption(option);
@@ -325,7 +320,6 @@
             }
         }
 
-        // 按钮交互
         const btnWorld = document.getElementById('btn-world');
         const btnChina = document.getElementById('btn-china');
         const mapTitle = document.getElementById('map-title');
@@ -333,23 +327,19 @@
         btnWorld.onclick = () => {
             btnWorld.classList.add('active');
             btnChina.classList.remove('active');
-            mapTitle.innerHTML = '<i class="fas fa-globe mr-3 text-blue-400"></i>全球 · 6个国家';
+            mapTitle.innerHTML = '<i class="fas fa-globe mr-3 text-blue-400"></i>全球 · 2个国家';
             initMap('world');
         };
 
         btnChina.onclick = () => {
             btnChina.classList.add('active');
             btnWorld.classList.remove('active');
-            mapTitle.innerHTML = '<i class="fas fa-map mr-3 text-red-400"></i>中国 · 28个城市';
+            mapTitle.innerHTML = '<i class="fas fa-map mr-3 text-red-400"></i>中国 · 14个省份';
             initMap('china');
         };
 
-        // 初始加载
         initMap('world');
-
         window.addEventListener('resize', () => chart.resize());
     </script>
 </body>
 </html>
-
-
