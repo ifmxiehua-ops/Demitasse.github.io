@@ -148,7 +148,6 @@
     </section>
 
     <!-- 关于我 Section -->
-    <!-- 【新增】关于我 Section -->
     <section id="about" class="py-24 relative overflow-hidden">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col items-center justify-center mb-16">
@@ -171,9 +170,9 @@
                         <div class="absolute w-4 h-4 bg-primary rounded-full -left-[9px] top-1 shadow-[0_0_10px_#a855f7]"></div>
                         <h4 class="text-xl font-bold text-gray-200">同济大学</h4>
                         <h5 class="text-md font-semibold text-gray-300 mt-1">海洋与地球科学学院</h5>
-                        <p class="text-primary text-sm font-mono mt-1 mb-3">202X - 至今</p>
+                        <p class="text-primary text-sm font-mono mt-1 mb-3">2025.9.5 - 至今</p>
                         <p class="text-slate-400 text-sm leading-relaxed">
-                            主攻海洋技术方向，同时对计算机科学有着浓厚的兴趣。致力于跨学科领域探索，希望用数字和代码解开深海的秘密。
+                           探索海洋的码农||热衷于vibe—coding的海洋人
                         </p>
                     </div>
                 </div>
@@ -206,11 +205,11 @@
                     <ul class="space-y-4 text-slate-400 text-sm">
                         <li class="flex items-start">
                             <i class="fas fa-plane-departure mt-1 w-6 text-accent"></i> 
-                            <div><strong class="text-gray-200">旅行探险：</strong>喜欢背上背包，用脚步丈量世界，记录不同城市的脉搏与风土人情。</div>
+                            <div><strong class="text-gray-200">旅行探险：</strong>探索不同城市的脉搏与风土人情。</div>
                         </li>
                         <li class="flex items-start">
                             <i class="fas fa-camera mt-1 w-6 text-accent"></i> 
-                            <div><strong class="text-gray-200">光影摄影：</strong>作为一名光影捕捉者，享受每一次快门按下的瞬间，定格美好。</div>
+                            <div><strong class="text-gray-200">捕风捉影：</strong>用长焦定格每一刻</div>
                         </li>
                         <li class="flex items-start">
                             <i class="fas fa-code mt-1 w-6 text-accent"></i> 
@@ -305,12 +304,9 @@
                             <p class="text-sm text-slate-400">2025年8月8日 - 2025年8月10日</p>
                         </div>
                         <div class="grid grid-cols-3 gap-2">
-                            <img src="https://picsum.photos/seed/nj1/200/200" class="rounded-lg w-full aspect-square object-cover hover:scale-105 transition-transform cursor-pointer" alt="成都">
-                            <img src="https://picsum.photos/seed/nj2/200/200" class="rounded-lg w-full aspect-square object-cover hover:scale-105 transition-transform cursor-pointer" alt="成都">
-                            <img src="https://picsum.photos/seed/nj3/200/200" class="rounded-lg w-full aspect-square object-cover hover:scale-105 transition-transform cursor-pointer" alt="成都">
-                            <img src="https://picsum.photos/seed/nj4/200/200" class="rounded-lg w-full aspect-square object-cover hover:scale-105 transition-transform cursor-pointer" alt="成都">
-                            <img src="https://picsum.photos/seed/nj5/200/200" class="rounded-lg w-full aspect-square object-cover hover:scale-105 transition-transform cursor-pointer" alt="成都">
-                            <img src="https://picsum.photos/seed/nj6/200/200" class="rounded-lg w-full aspect-square object-cover hover:scale-105 transition-transform cursor-pointer" alt="成都">
+                            <img src="https://ibb.co/VYN6CLH2" class="rounded-lg w-full aspect-square object-cover hover:scale-105 transition-transform cursor-pointer" alt="成都">
+                            <img src="https://ibb.co/gZJWRhPR" class="rounded-lg w-full aspect-square object-cover hover:scale-105 transition-transform cursor-pointer" alt="成都">
+                           
                         </div>
                     </div>
 
@@ -452,6 +448,10 @@
 
         async function initMap(type) {
             chart.showLoading({ maskColor: 'rgba(0, 0, 0, 0.2)', textColor: '#fff' });
+            
+            // 每次重新加载地图前先清理实例配置，防止前一个图层的属性残留
+            chart.clear(); 
+            
             const mapUrl = type === 'world' 
                 ? 'https://cdn.jsdelivr.net/npm/echarts@4.9.0/map/json/world.json'
                 : 'https://cdn.jsdelivr.net/npm/echarts@4.9.0/map/json/china.json';
@@ -460,19 +460,29 @@
                 const response = await fetch(mapUrl);
                 const geoJson = await response.json();
                 echarts.registerMap(type, geoJson);
+
+                // 根据地图类型动态调整经纬度中心和缩放比例
+                // 世界地图不特意设定center，默认偏中；中国地图由于南海诸岛，手动将视觉中心定在大陆中央
+                const mapCenter = type === 'world' ? [0, 30] : [104.2, 36.0];
+                const mapZoom = type === 'world' ? 1.2 : 1.3;
+
                 const option = {
                     tooltip: { trigger: 'item', formatter: '{b}' },
                     visualMap: { show: false, min: 0, max: 1, inRange: { color: ['rgba(255,255,255,0.05)', '#a855f7'] } },
                     series: [{
-                        type: 'map', map: type, roam: true,
-                        layoutCenter: ['50%', '50%'], layoutSize: '100%',
+                        type: 'map', 
+                        map: type, 
+                        roam: true,
+                        // 移除 layoutCenter 和 layoutSize，使用标准的 center 和 zoom 属性来控制视角
+                        zoom: mapZoom,
+                        center: mapCenter, 
                         itemStyle: { borderColor: 'rgba(255,255,255,0.1)', borderWidth: 0.5, areaColor: '#ffffff' },
                         data: type === 'world' ? visitedCountries : visitedProvinces
                     }]
                 };
                 chart.hideLoading();
                 chart.setOption(option);
-            } catch (err) { console.error("地图加载失败:", err); }
+            } catch (err) { console.error("地图加载失败:", err); chart.hideLoading(); }
         }
 
         const btnWorld = document.getElementById('btn-world');
