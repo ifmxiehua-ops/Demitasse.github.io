@@ -205,7 +205,6 @@
                 </div>
 
                 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <!-- 印象卡片 1 - 上海 (已修正直链) -->
                     <div class="glass rounded-3xl p-6 transition-transform duration-300 hover:-translate-y-2 hover:bg-white/5">
                         <div class="text-center mb-5">
                             <h4 class="text-2xl font-bold text-white mb-2">上海市, 中国</h4>
@@ -301,6 +300,39 @@
         </div>
     </section>
 
+    <!-- 【新增】基于图7全新设计的画廊模态框 -->
+    <div id="image-modal" class="fixed inset-0 z-[100] bg-black/80 backdrop-blur-sm hidden flex items-center justify-center opacity-0 transition-opacity duration-300">
+        <!-- 保持外部有个关闭按钮用于安全退出 -->
+        <button id="close-modal" class="absolute top-6 right-6 text-white text-4xl hover:text-primary transition-colors cursor-pointer z-50">
+            <i class="fas fa-times"></i>
+        </button>
+        
+        <!-- 卡片主体 (仿图7紫色圆角卡片) -->
+        <div id="modal-card" class="bg-gradient-to-br from-[#62329e] to-[#451f78] rounded-3xl p-6 md:p-8 w-[90%] max-w-4xl shadow-2xl scale-95 transition-transform duration-300 flex flex-col gap-5 border border-white/10">
+            <!-- Header：图标 + 城市名 -->
+            <div class="flex items-center text-white ml-2">
+                <i class="fas fa-lightbulb text-xl mr-3 opacity-80 shadow-primary drop-shadow-lg"></i>
+                <h3 id="modal-title" class="text-2xl font-bold tracking-widest">城市名</h3>
+            </div>
+
+            <!-- 图片容器 -->
+            <div class="relative w-full flex items-center justify-center rounded-xl overflow-hidden mt-2">
+                <img id="modal-image" src="" class="max-w-full max-h-[60vh] object-contain rounded-xl shadow-lg" alt="Enlarged view">
+            </div>
+
+            <!-- 底部控制栏：上一张、页码、下一张 -->
+            <div class="flex items-center justify-center gap-6 text-white mt-4 mb-2">
+                <button id="modal-prev" class="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center hover:bg-white/20 transition-all cursor-pointer">
+                    <i class="fas fa-chevron-left text-sm opacity-80"></i>
+                </button>
+                <span id="modal-counter" class="font-mono tracking-widest text-lg opacity-90 w-20 text-center">1 / 6</span>
+                <button id="modal-next" class="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center hover:bg-white/20 transition-all cursor-pointer">
+                    <i class="fas fa-chevron-right text-sm opacity-80"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
     <footer class="py-12 border-t border-white/5">
         <div class="max-w-7xl mx-auto px-4 text-center">
             <div class="flex justify-center space-x-6 mb-6">
@@ -387,6 +419,94 @@
         };
         initMap('world');
         window.addEventListener('resize', () => chart.resize());
+
+        // ==========================================
+        // 【新增】分组画廊(Gallery)逻辑
+        // ==========================================
+        const imageModal = document.getElementById('image-modal');
+        const modalCard = document.getElementById('modal-card');
+        const modalImg = document.getElementById('modal-image');
+        const modalTitle = document.getElementById('modal-title');
+        const modalCounter = document.getElementById('modal-counter');
+        const closeModalBtn = document.getElementById('close-modal');
+        const prevBtn = document.getElementById('modal-prev');
+        const nextBtn = document.getElementById('modal-next');
+
+        let currentImageGroup = [];
+        let currentImageIndex = 0;
+
+        // 获取所有带有图片的卡片(印象角落)
+        const impressionCards = document.querySelectorAll('#travel .glass.rounded-3xl');
+
+        impressionCards.forEach(card => {
+            // 获取该卡片的城市名字（例如 "上海市, 中国" 截取 "上海市"）
+            const titleElement = card.querySelector('h4');
+            if (!titleElement) return;
+            const fullTitle = titleElement.innerText;
+            const cityTitle = fullTitle.split(',')[0]; 
+
+            // 获取这个卡片下的所有图片
+            const images = Array.from(card.querySelectorAll('img'));
+
+            images.forEach((img, index) => {
+                img.addEventListener('click', () => {
+                    currentImageGroup = images;
+                    currentImageIndex = index;
+                    openModal(cityTitle);
+                });
+            });
+        });
+
+        function updateModalContent() {
+            modalImg.src = currentImageGroup[currentImageIndex].src;
+            modalCounter.innerText = `${currentImageIndex + 1} / ${currentImageGroup.length}`;
+        }
+
+        function openModal(title) {
+            modalTitle.innerText = title;
+            updateModalContent();
+            
+            imageModal.classList.remove('hidden');
+            setTimeout(() => {
+                imageModal.classList.remove('opacity-0');
+                modalCard.classList.remove('scale-95');
+                modalCard.classList.add('scale-100');
+            }, 10);
+            document.body.style.overflow = 'hidden'; 
+        }
+
+        function closeModal() {
+            imageModal.classList.add('opacity-0');
+            modalCard.classList.remove('scale-100');
+            modalCard.classList.add('scale-95');
+            setTimeout(() => {
+                imageModal.classList.add('hidden');
+                modalImg.src = '';
+            }, 300);
+            document.body.style.overflow = ''; 
+        }
+
+        // 翻页逻辑
+        prevBtn.addEventListener('click', (e) => {
+            e.stopPropagation(); // 防止点击穿透关闭弹窗
+            currentImageIndex = (currentImageIndex - 1 + currentImageGroup.length) % currentImageGroup.length;
+            updateModalContent();
+        });
+
+        nextBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            currentImageIndex = (currentImageIndex + 1) % currentImageGroup.length;
+            updateModalContent();
+        });
+
+        // 关闭事件
+        closeModalBtn.addEventListener('click', closeModal);
+        imageModal.addEventListener('click', (e) => {
+            // 点击黑色背景也能关闭，但点击紫色卡片内部不会关闭
+            if (e.target === imageModal) {
+                closeModal();
+            }
+        });
     </script>
 </body>
 </html>
