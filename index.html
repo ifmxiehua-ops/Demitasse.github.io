@@ -100,6 +100,7 @@
                 </div>
                 <div class="hidden md:flex space-x-8 items-center">
                     <a href="#home" class="hover:text-primary transition-colors">首页</a>
+                    <a href="#about" class="hover:text-primary transition-colors">关于我</a>
                     <a href="#travel" class="hover:text-primary transition-colors">足迹</a>
                     <a href="#projects" class="hover:text-primary transition-colors">项目</a>
                     <button id="theme-toggle" class="p-2 rounded-full hover:bg-white/10 transition-colors">
@@ -113,6 +114,7 @@
         </div>
     </nav>
 
+    <!-- 首页 Hero -->
     <section id="home" class="min-h-screen flex items-center justify-center pt-16 px-4">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-12">
             <div class="md:w-1/2 text-center md:text-left z-10">
@@ -127,8 +129,8 @@
                     同济大学在读，深耕海洋技术与计算机科学。用代码连接星辰与大海。
                 </p>
                 <div class="flex justify-center md:justify-start space-x-4 fade-in-up delay-300">
-                    <a href="#travel" class="bg-primary hover:bg-purple-600 text-white px-8 py-3 rounded-xl font-bold shadow-xl shadow-purple-500/20 transition-all hover:scale-105">
-                        探索足迹
+                    <a href="#about" class="bg-primary hover:bg-purple-600 text-white px-8 py-3 rounded-xl font-bold shadow-xl shadow-purple-500/20 transition-all hover:scale-105">
+                        了解更多
                     </a>
                     <a href="#projects" class="glass px-8 py-3 rounded-xl font-bold transition-all hover:bg-white/10">
                         查看项目
@@ -145,6 +147,83 @@
         </div>
     </section>
 
+    <!-- 关于我 Section -->
+    <!-- 【新增】关于我 Section -->
+    <section id="about" class="py-24 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col items-center justify-center mb-16">
+                <h2 class="text-4xl font-bold text-center mb-4 text-white">关于我</h2>
+                <div class="w-16 h-1 bg-primary rounded"></div>
+            </div>
+
+            <!-- 三个模块：采用网格布局放一行 -->
+            <div class="grid lg:grid-cols-3 gap-8 relative z-10">
+                
+                <!-- 模块 1：教育经历 -->
+                <div class="glass rounded-3xl p-8 hover:-translate-y-2 transition-transform duration-300 group">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center text-primary text-2xl mr-4 group-hover:bg-primary group-hover:text-white transition-colors">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white">教育经历</h3>
+                    </div>
+                    <div class="border-l-2 border-primary/30 pl-6 ml-2 relative">
+                        <div class="absolute w-4 h-4 bg-primary rounded-full -left-[9px] top-1 shadow-[0_0_10px_#a855f7]"></div>
+                        <h4 class="text-xl font-bold text-gray-200">同济大学</h4>
+                        <h5 class="text-md font-semibold text-gray-300 mt-1">海洋与地球科学学院</h5>
+                        <p class="text-primary text-sm font-mono mt-1 mb-3">202X - 至今</p>
+                        <p class="text-slate-400 text-sm leading-relaxed">
+                            主攻海洋技术方向，同时对计算机科学有着浓厚的兴趣。致力于跨学科领域探索，希望用数字和代码解开深海的秘密。
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 模块 2：专业技能 -->
+                <div class="glass rounded-3xl p-8 hover:-translate-y-2 transition-transform duration-300 group">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 rounded-full bg-blue-500/20 flex items-center justify-center text-blue-400 text-2xl mr-4 group-hover:bg-blue-500 group-hover:text-white transition-colors">
+                            <i class="fas fa-laptop-code"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white">专业技能</h3>
+                    </div>
+                    <div class="flex flex-wrap gap-3">
+                        <span class="px-4 py-2 bg-white/5 rounded-xl text-sm font-medium text-slate-300 border border-white/10 flex items-center hover:bg-white/10 transition-colors"><i class="fab fa-python mr-2 text-yellow-400"></i>Python / 数据分析</span>
+                        <span class="px-4 py-2 bg-white/5 rounded-xl text-sm font-medium text-slate-300 border border-white/10 flex items-center hover:bg-white/10 transition-colors"><i class="fab fa-node-js mr-2 text-green-400"></i>Node.js</span>
+                        <span class="px-4 py-2 bg-white/5 rounded-xl text-sm font-medium text-slate-300 border border-white/10 flex items-center hover:bg-white/10 transition-colors">C / C++ Core</span>
+                        <span class="px-4 py-2 bg-white/5 rounded-xl text-sm font-medium text-slate-300 border border-white/10 flex items-center hover:bg-white/10 transition-colors"><i class="fas fa-network-wired mr-2 text-blue-400"></i>UDP / 通信协议</span>
+                        <span class="px-4 py-2 bg-white/5 rounded-xl text-sm font-medium text-slate-300 border border-white/10 flex items-center hover:bg-white/10 transition-colors">前端 UI / Tailwind</span>
+                    </div>
+                </div>
+
+                <!-- 模块 3：兴趣爱好 -->
+                <div class="glass rounded-3xl p-8 hover:-translate-y-2 transition-transform duration-300 group">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 rounded-full bg-accent/20 flex items-center justify-center text-accent text-2xl mr-4 group-hover:bg-accent group-hover:text-darkBg transition-colors">
+                            <i class="fas fa-camera-retro"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white">兴趣爱好</h3>
+                    </div>
+                    <ul class="space-y-4 text-slate-400 text-sm">
+                        <li class="flex items-start">
+                            <i class="fas fa-plane-departure mt-1 w-6 text-accent"></i> 
+                            <div><strong class="text-gray-200">旅行探险：</strong>喜欢背上背包，用脚步丈量世界，记录不同城市的脉搏与风土人情。</div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-camera mt-1 w-6 text-accent"></i> 
+                            <div><strong class="text-gray-200">光影摄影：</strong>作为一名光影捕捉者，享受每一次快门按下的瞬间，定格美好。</div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-code mt-1 w-6 text-accent"></i> 
+                            <div><strong class="text-gray-200">开源极客：</strong>热衷于造轮子，享受从零到一构建项目、解决棘手 Bug 的成就感。</div>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 足迹 Section -->
     <section id="travel" class="py-24 relative overflow-hidden">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
@@ -300,27 +379,22 @@
         </div>
     </section>
 
-    <!-- 【新增】基于图7全新设计的画廊模态框 -->
+    <!-- 分组画廊(Gallery)模态框 -->
     <div id="image-modal" class="fixed inset-0 z-[100] bg-black/80 backdrop-blur-sm hidden flex items-center justify-center opacity-0 transition-opacity duration-300">
-        <!-- 保持外部有个关闭按钮用于安全退出 -->
         <button id="close-modal" class="absolute top-6 right-6 text-white text-4xl hover:text-primary transition-colors cursor-pointer z-50">
             <i class="fas fa-times"></i>
         </button>
         
-        <!-- 卡片主体 (仿图7紫色圆角卡片) -->
         <div id="modal-card" class="bg-gradient-to-br from-[#62329e] to-[#451f78] rounded-3xl p-6 md:p-8 w-[90%] max-w-4xl shadow-2xl scale-95 transition-transform duration-300 flex flex-col gap-5 border border-white/10">
-            <!-- Header：图标 + 城市名 -->
             <div class="flex items-center text-white ml-2">
                 <i class="fas fa-lightbulb text-xl mr-3 opacity-80 shadow-primary drop-shadow-lg"></i>
                 <h3 id="modal-title" class="text-2xl font-bold tracking-widest">城市名</h3>
             </div>
 
-            <!-- 图片容器 -->
             <div class="relative w-full flex items-center justify-center rounded-xl overflow-hidden mt-2">
                 <img id="modal-image" src="" class="max-w-full max-h-[60vh] object-contain rounded-xl shadow-lg" alt="Enlarged view">
             </div>
 
-            <!-- 底部控制栏：上一张、页码、下一张 -->
             <div class="flex items-center justify-center gap-6 text-white mt-4 mb-2">
                 <button id="modal-prev" class="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center hover:bg-white/20 transition-all cursor-pointer">
                     <i class="fas fa-chevron-left text-sm opacity-80"></i>
@@ -420,9 +494,7 @@
         initMap('world');
         window.addEventListener('resize', () => chart.resize());
 
-        // ==========================================
-        // 【新增】分组画廊(Gallery)逻辑
-        // ==========================================
+        // 分组画廊(Gallery)逻辑
         const imageModal = document.getElementById('image-modal');
         const modalCard = document.getElementById('modal-card');
         const modalImg = document.getElementById('modal-image');
@@ -435,17 +507,14 @@
         let currentImageGroup = [];
         let currentImageIndex = 0;
 
-        // 获取所有带有图片的卡片(印象角落)
         const impressionCards = document.querySelectorAll('#travel .glass.rounded-3xl');
 
         impressionCards.forEach(card => {
-            // 获取该卡片的城市名字（例如 "上海市, 中国" 截取 "上海市"）
             const titleElement = card.querySelector('h4');
             if (!titleElement) return;
             const fullTitle = titleElement.innerText;
             const cityTitle = fullTitle.split(',')[0]; 
 
-            // 获取这个卡片下的所有图片
             const images = Array.from(card.querySelectorAll('img'));
 
             images.forEach((img, index) => {
@@ -486,9 +555,8 @@
             document.body.style.overflow = ''; 
         }
 
-        // 翻页逻辑
         prevBtn.addEventListener('click', (e) => {
-            e.stopPropagation(); // 防止点击穿透关闭弹窗
+            e.stopPropagation(); 
             currentImageIndex = (currentImageIndex - 1 + currentImageGroup.length) % currentImageGroup.length;
             updateModalContent();
         });
@@ -499,10 +567,8 @@
             updateModalContent();
         });
 
-        // 关闭事件
         closeModalBtn.addEventListener('click', closeModal);
         imageModal.addEventListener('click', (e) => {
-            // 点击黑色背景也能关闭，但点击紫色卡片内部不会关闭
             if (e.target === imageModal) {
                 closeModal();
             }
