@@ -16,8 +16,8 @@
                 extend: {
                     colors: {
                         primary: '#a855f7', 
-                        accent: '#2dd4bf', // 草绿色/青色点缀
-                        darkBg: '#020617', // 更深邃的底色
+                        accent: '#2dd4bf', 
+                        darkBg: '#020617', 
                     }
                 }
             }
@@ -30,7 +30,6 @@
             background-color: #020617; 
         }
 
-        /* 朦胧背景光效 */
         .blob {
             position: fixed;
             width: 500px;
@@ -42,16 +41,15 @@
             animation: move 20s infinite alternate;
             pointer-events: none;
         }
-        .blob-1 { background: #10b981; top: -100px; left: -100px; animation-delay: 0s; } /* 草绿色 */
-        .blob-2 { background: #3b82f6; bottom: -100px; right: -100px; animation-delay: -5s; } /* 蓝色 */
-        .blob-3 { background: #a855f7; top: 40%; left: 30%; animation-delay: -10s; width: 400px; height: 400px; } /* 紫色 */
+        .blob-1 { background: #10b981; top: -100px; left: -100px; animation-delay: 0s; }
+        .blob-2 { background: #3b82f6; bottom: -100px; right: -100px; animation-delay: -5s; }
+        .blob-3 { background: #a855f7; top: 40%; left: 30%; animation-delay: -10s; width: 400px; height: 400px; }
 
         @keyframes move {
             from { transform: translate(0, 0) scale(1); }
             to { transform: translate(100px, 50px) scale(1.2); }
         }
 
-        /* 毛玻璃效果 */
         .glass {
             background: rgba(255, 255, 255, 0.03);
             backdrop-filter: blur(16px);
@@ -83,7 +81,6 @@
             box-shadow: 0 0 20px rgba(168, 85, 247, 0.4);
         }
 
-        /* 隐藏滚动条但保留功能 */
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: rgba(168, 85, 247, 0.2); border-radius: 10px; }
@@ -91,12 +88,10 @@
 </head>
 <body class="text-gray-200 transition-colors duration-300 overflow-x-hidden">
 
-    <!-- 背景装饰光晕 -->
     <div class="blob blob-1"></div>
     <div class="blob blob-2"></div>
     <div class="blob blob-3"></div>
 
-    <!-- 导航栏 -->
     <nav class="fixed w-full z-50 glass border-b border-white/5 transition-all duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
@@ -118,7 +113,6 @@
         </div>
     </nav>
 
-    <!-- 首页 Hero -->
     <section id="home" class="min-h-screen flex items-center justify-center pt-16 px-4">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-12">
             <div class="md:w-1/2 text-center md:text-left z-10">
@@ -142,7 +136,6 @@
                 </div>
             </div>
             <div class="md:w-1/2 flex justify-center fade-in-up relative">
-                <!-- 装饰性光环 -->
                 <div class="absolute w-full h-full bg-primary/20 blur-[100px] rounded-full animate-pulse"></div>
                 <div class="relative w-64 h-64 md:w-80 md:h-80 glass rounded-full flex items-center justify-center text-7xl border-white/10 shadow-2xl overflow-hidden group">
                     <div class="absolute inset-0 bg-gradient-to-tr from-primary/20 to-accent/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
@@ -152,7 +145,6 @@
         </div>
     </section>
 
-    <!-- 足迹 Section -->
     <section id="travel" class="py-24 relative overflow-hidden">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
@@ -170,7 +162,6 @@
                 </div>
             </div>
 
-            <!-- 地图主体 (毛玻璃风格) -->
             <div class="glass rounded-3xl p-4 md:p-8 shadow-2xl min-h-[500px] md:min-h-[650px] flex flex-col relative overflow-hidden">
                 <div class="relative z-10 flex items-center justify-center mb-4 space-x-6">
                     <div id="map-title" class="text-white text-xl font-bold flex items-center">
@@ -186,7 +177,6 @@
                 </div>
             </div>
 
-            <!-- 数据卡片 (毛玻璃) -->
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
                 <div class="p-6 glass rounded-2xl text-center hover:bg-white/5 transition-all">
                     <div class="text-3xl font-black text-primary mb-1">2</div>
@@ -206,7 +196,6 @@
                 </div>
             </div>
 
-            <!-- 【新增】光影印象 -->
             <div class="mt-24">
                 <div class="flex flex-col items-center justify-center mb-12">
                     <h3 class="text-3xl font-bold flex items-center text-white">
@@ -216,7 +205,7 @@
                 </div>
 
                 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <!-- 印象卡片 1 -->
+                    <!-- 印象卡片 1 - 上海 (已修正直链) -->
                     <div class="glass rounded-3xl p-6 transition-transform duration-300 hover:-translate-y-2 hover:bg-white/5">
                         <div class="text-center mb-5">
                             <h4 class="text-2xl font-bold text-white mb-2">上海市, 中国</h4>
@@ -232,57 +221,47 @@
                         </div>
                     </div>
 
-                    <!-- 印象卡片 2 -->
                     <div class="glass rounded-3xl p-6 transition-transform duration-300 hover:-translate-y-2 hover:bg-white/5">
                         <div class="text-center mb-5">
                             <h4 class="text-2xl font-bold text-white mb-2">成都市, 中国</h4>
                             <p class="text-sm text-slate-400">2025年8月8日 - 2025年8月10日</p>
                         </div>
                         <div class="grid grid-cols-3 gap-2">
-                            <img src="https://picsum.photos/seed/nj1/200/200" class="rounded-lg w-full aspect-square object-cover hover:scale-105 transition-transform cursor-pointer" alt="南京">
-                            <img src="https://picsum.photos/seed/nj2/200/200" class="rounded-lg w-full aspect-square object-cover hover:scale-105 transition-transform cursor-pointer" alt="南京">
-                            <img src="https://picsum.photos/seed/nj3/200/200" class="rounded-lg w-full aspect-square object-cover hover:scale-105 transition-transform cursor-pointer" alt="南京">
-                            <img src="https://picsum.photos/seed/nj4/200/200" class="rounded-lg w-full aspect-square object-cover hover:scale-105 transition-transform cursor-pointer" alt="南京">
-                            <img src="https://picsum.photos/seed/nj5/200/200" class="rounded-lg w-full aspect-square object-cover hover:scale-105 transition-transform cursor-pointer" alt="南京">
-                            <img src="https://picsum.photos/seed/nj6/200/200" class="rounded-lg w-full aspect-square object-cover hover:scale-105 transition-transform cursor-pointer" alt="南京">
+                            <img src="https://picsum.photos/seed/nj1/200/200" class="rounded-lg w-full aspect-square object-cover hover:scale-105 transition-transform cursor-pointer" alt="成都">
+                            <img src="https://picsum.photos/seed/nj2/200/200" class="rounded-lg w-full aspect-square object-cover hover:scale-105 transition-transform cursor-pointer" alt="成都">
+                            <img src="https://picsum.photos/seed/nj3/200/200" class="rounded-lg w-full aspect-square object-cover hover:scale-105 transition-transform cursor-pointer" alt="成都">
+                            <img src="https://picsum.photos/seed/nj4/200/200" class="rounded-lg w-full aspect-square object-cover hover:scale-105 transition-transform cursor-pointer" alt="成都">
+                            <img src="https://picsum.photos/seed/nj5/200/200" class="rounded-lg w-full aspect-square object-cover hover:scale-105 transition-transform cursor-pointer" alt="成都">
+                            <img src="https://picsum.photos/seed/nj6/200/200" class="rounded-lg w-full aspect-square object-cover hover:scale-105 transition-transform cursor-pointer" alt="成都">
                         </div>
                     </div>
 
-                    <!-- 印象卡片 3 -->
                     <div class="glass rounded-3xl p-6 transition-transform duration-300 hover:-translate-y-2 hover:bg-white/5">
                         <div class="text-center mb-5">
                             <h4 class="text-2xl font-bold text-white mb-2">重庆市, 中国</h4>
                             <p class="text-sm text-slate-400">2025年7月11日</p>
                         </div>
                         <div class="grid grid-cols-3 gap-2">
-                            <img src="https://picsum.photos/seed/cs1/200/200" class="rounded-lg w-full aspect-square object-cover hover:scale-105 transition-transform cursor-pointer" alt="常熟">
-                            <img src="https://picsum.photos/seed/cs2/200/200" class="rounded-lg w-full aspect-square object-cover hover:scale-105 transition-transform cursor-pointer" alt="常熟">
+                            <img src="https://picsum.photos/seed/cs1/200/200" class="rounded-lg w-full aspect-square object-cover hover:scale-105 transition-transform cursor-pointer" alt="重庆">
+                            <img src="https://picsum.photos/seed/cs2/200/200" class="rounded-lg w-full aspect-square object-cover hover:scale-105 transition-transform cursor-pointer" alt="重庆">
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- 新增结束 -->
-
         </div>
     </section>
 
-    <!-- 项目 Section -->
     <section id="projects" class="py-24 relative">
         <div class="max-w-7xl mx-auto px-4">
             <h2 class="text-4xl font-bold text-center mb-16">个人项目经历/Project</h2>
-            <!-- 将 lg:grid-cols-2 改为 lg:grid-cols-3 -->
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                
-                <!-- 项目: 2026美赛C题 -->
                 <div class="glass group rounded-3xl overflow-hidden shadow-xl hover:-translate-y-2 transition-all p-1">
-                    <!-- 将 h-56 改为 h-40 -->
                     <div class="h-40 bg-gradient-to-br from-indigo-900 via-blue-900 to-black flex flex-col items-center justify-center text-white relative overflow-hidden">
                         <div class="absolute inset-0 opacity-30 group-hover:scale-110 transition-transform duration-700">
                              <div class="absolute top-10 left-10 w-2 h-2 bg-white rounded-full animate-pulse"></div>
                              <div class="absolute top-20 right-20 w-1 h-1 bg-white rounded-full"></div>
                              <div class="absolute bottom-10 left-1/2 w-1.5 h-1.5 bg-white rounded-full animate-ping"></div>
                         </div>
-                        <!-- 将图标大小 text-6xl 改为 text-5xl -->
                         <i class="fas fa-satellite text-5xl mb-4 text-indigo-400 group-hover:rotate-12 transition-transform"></i>
                         <span class="text-xs font-mono tracking-tighter opacity-60 italic">"Dancing with the Stars"</span>
                     </div>
@@ -299,17 +278,11 @@
                             <span class="px-3 py-1 bg-white/5 rounded-full text-xs font-medium text-slate-300">最佳策略寻求</span>
                             <span class="px-3 py-1 bg-white/5 rounded-full text-xs font-medium text-slate-300">Python</span>
                         </div>
-                        <a href="#" class="text-indigo-400 font-bold inline-flex items-center group/link">
-                            查看研究报告 <i class="fas fa-arrow-right ml-2 text-xs group-hover/link:translate-x-1 transition-transform"></i>
-                        </a>
                     </div>
                 </div>
 
-                <!-- 项目: 无损传输 -->
                 <div class="glass group rounded-3xl overflow-hidden shadow-xl hover:-translate-y-2 transition-all p-1">
-                    <!-- 将 h-56 改为 h-40 -->
                     <div class="h-40 bg-gradient-to-br from-purple-900 via-slate-900 to-black flex items-center justify-center text-white">
-                        <!-- 将图标大小 text-6xl 改为 text-5xl -->
                         <i class="fas fa-bolt text-5xl text-primary group-hover:scale-110 transition-transform"></i>
                     </div>
                     <div class="p-8">
@@ -322,17 +295,12 @@
                             <span class="px-3 py-1 bg-white/5 rounded-full text-xs font-medium text-slate-300">C++ Core</span>
                             <span class="px-3 py-1 bg-white/5 rounded-full text-xs font-medium text-slate-300">UDP/KCP</span>
                         </div>
-                        <a href="#" class="text-primary font-bold inline-flex items-center group/link">
-                            技术细节 <i class="fas fa-arrow-right ml-2 text-xs group-hover/link:translate-x-1 transition-transform"></i>
-                        </a>
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
 
-    <!-- 页脚 -->
     <footer class="py-12 border-t border-white/5">
         <div class="max-w-7xl mx-auto px-4 text-center">
             <div class="flex justify-center space-x-6 mb-6">
@@ -345,7 +313,6 @@
     </footer>
 
     <script>
-        // 1. 打字机
         const texts = ["05在读大学生", "同济海洋人", "全栈开发探索者"];
         let count = 0, index = 0;
         function type() {
@@ -362,14 +329,11 @@
         }
         type();
 
-        // 3. ECharts 地图逻辑
         const chart = echarts.init(document.getElementById('echarts-map'));
-        
         const visitedCountries = [
             {name: 'China', value: 1},
             {name: 'Japan', value: 1}
         ];
-
         const visitedProvinces = [
             {name: '内蒙古', value: 1}, {name: '黑龙江', value: 1}, 
             {name: '北京', value: 1}, {name: '上海', value: 1}, 
@@ -382,7 +346,6 @@
 
         async function initMap(type) {
             chart.showLoading({ maskColor: 'rgba(0, 0, 0, 0.2)', textColor: '#fff' });
-            
             const mapUrl = type === 'world' 
                 ? 'https://cdn.jsdelivr.net/npm/echarts@4.9.0/map/json/world.json'
                 : 'https://cdn.jsdelivr.net/npm/echarts@4.9.0/map/json/china.json';
@@ -391,49 +354,19 @@
                 const response = await fetch(mapUrl);
                 const geoJson = await response.json();
                 echarts.registerMap(type, geoJson);
-
                 const option = {
-                    tooltip: {
-                        trigger: 'item',
-                        formatter: '{b}',
-                        backgroundColor: 'rgba(15, 23, 42, 0.9)',
-                        borderColor: '#a855f7',
-                        textStyle: { color: '#fff' }
-                    },
-                    visualMap: {
-                        show: false,
-                        min: 0,
-                        max: 1,
-                        inRange: {
-                            color: ['rgba(255,255,255,0.05)', '#a855f7'] 
-                        }
-                    },
+                    tooltip: { trigger: 'item', formatter: '{b}' },
+                    visualMap: { show: false, min: 0, max: 1, inRange: { color: ['rgba(255,255,255,0.05)', '#a855f7'] } },
                     series: [{
-                        type: 'map',
-                        map: type,
-                        roam: true,
-                        layoutCenter: ['50%', '50%'], 
-                        layoutSize: type === 'china' ? '110%' : '100%', 
-                        center: type === 'china' ? [104.1954, 35.8617] : null,
-                        zoom: type === 'china' ? 1.2 : 1, 
-                        emphasis: {
-                            label: { show: false },
-                            itemStyle: { areaColor: '#c084fc' }
-                        },
-                        itemStyle: {
-                            borderColor: 'rgba(255,255,255,0.1)', 
-                            borderWidth: 0.5,
-                            areaColor: '#ffffff' // 【修改2】从未探索地区的颜色改为白色
-                        },
+                        type: 'map', map: type, roam: true,
+                        layoutCenter: ['50%', '50%'], layoutSize: '100%',
+                        itemStyle: { borderColor: 'rgba(255,255,255,0.1)', borderWidth: 0.5, areaColor: '#ffffff' },
                         data: type === 'world' ? visitedCountries : visitedProvinces
                     }]
                 };
-
                 chart.hideLoading();
                 chart.setOption(option);
-            } catch (err) {
-                console.error("地图加载失败:", err);
-            }
+            } catch (err) { console.error("地图加载失败:", err); }
         }
 
         const btnWorld = document.getElementById('btn-world');
@@ -446,32 +379,14 @@
             mapTitle.innerHTML = '<i class="fas fa-globe mr-3 text-blue-400"></i>全球 · 2个国家';
             initMap('world');
         };
-
         btnChina.onclick = () => {
             btnChina.classList.add('active');
             btnWorld.classList.remove('active');
             mapTitle.innerHTML = '<i class="fas fa-map mr-3 text-red-400"></i>中国 · 14个省份';
             initMap('china');
         };
-
         initMap('world');
         window.addEventListener('resize', () => chart.resize());
     </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
